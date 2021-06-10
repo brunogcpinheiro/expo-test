@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
-import Login from '../components/auth/Login'
+import LoginForm from '../components/auth/LoginForm'
 
 export default function LoginScreen() {
   return (
     <View style={styles.container}>
-      <Login />
+      <LoginForm />
     </View>
   )
 }

@@ -1,17 +1,13 @@
 import * as React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { Button } from 'react-native-paper'
-import { useNavigation } from '@react-navigation/native'
+import { CurrentUserContext } from '../context/CurrentUserContext'
 
 export default function Home() {
-  const navigation = useNavigation()
+  const data = React.useContext(CurrentUserContext)
 
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-      <Button mode="outlined" onPress={() => navigation.navigate('Login')}>
-        Login
-      </Button>
+      <Text> {data?.email}</Text>
     </View>
   )
 }

@@ -3,8 +3,8 @@ import { StatusBar } from 'expo-status-bar'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 
 import './configs/firebaseInitializer'
-import { CurrentUserContext } from './context/CurrentUserContext'
-import AppStack from './routes/AppStack'
+import { CurrentUserProvider } from './context/CurrentUserContext'
+import AppRoutes from './routes/app.routes'
 
 const themeConfigs: typeof DefaultTheme = {
   ...DefaultTheme,
@@ -18,8 +18,11 @@ const themeConfigs: typeof DefaultTheme = {
 export default function App() {
   return (
     <PaperProvider theme={themeConfigs}>
-      <StatusBar backgroundColor="transparent" translucent />
-      <AppStack />
+      <StatusBar style="light" />
+
+      <CurrentUserProvider>
+        <AppRoutes />
+      </CurrentUserProvider>
     </PaperProvider>
   )
 }

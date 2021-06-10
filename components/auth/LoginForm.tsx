@@ -35,7 +35,6 @@ export default function Login() {
 
   return (
     <>
-      <Text>{firebase.auth().currentUser?.email}</Text>
       <TextInput
         mode="outlined"
         label="Email"
