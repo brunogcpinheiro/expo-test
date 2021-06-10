@@ -1,13 +1,23 @@
+import firebase from 'firebase'
 import * as React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { Button } from 'react-native-paper'
 import { CurrentUserContext } from '../context/CurrentUserContext'
 
 export default function Home() {
   const data = React.useContext(CurrentUserContext)
 
+  function handleLogout() {
+    firebase.auth().signOut()
+  }
+
   return (
     <View style={styles.container}>
-      <Text> {data?.email}</Text>
+      <Text>Bem vindo, {data?.name}!</Text>
+      <Text>Seu email.: {data?.email}</Text>
+      <Button mode="contained" style={{ marginTop: 30 }} onPress={handleLogout}>
+        <Text>Sair</Text>
+      </Button>
     </View>
   )
 }

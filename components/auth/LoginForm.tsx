@@ -11,9 +11,7 @@ export default function Login() {
     setIsLoading(true)
 
     try {
-      const response = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
+      await firebase.auth().signInWithEmailAndPassword(email, password)
 
       await firebase
         .firestore()
@@ -25,8 +23,6 @@ export default function Login() {
           },
           { merge: true }
         )
-
-      console.log(response)
     } catch (e) {
     } finally {
       setIsLoading(false)

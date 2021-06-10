@@ -1,9 +1,9 @@
 import * as React from 'react'
 import firebase from 'firebase'
-import { useNavigation } from '@react-navigation/native'
 
 interface CurrentUser {
   email: string | null
+  name?: string
 }
 
 interface CurrentUserProviderProps {
@@ -16,8 +16,22 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const [currentUser, setCurrentUser] = React.useState<CurrentUser | null>(null)
 
   React.useEffect(() => {
-    firebase.auth().onAuthStateChanged(userState => {
-      setCurrentUser(userState ?? ({} as CurrentUser))
+    firebase.auth().onAuthStateChanged(async userState => {
+      if (userState?.uid) {
+        const response = await firebase
+          .firestore()
+          .collection('users')
+          .doc(userState?.uid)
+          .get()
+
+        const currentUserData = response.data() as CurrentUser
+
+        setCurrentUser(currentUserData)
+
+        return
+      }
+
+      setCurrentUser({} as CurrentUser)
     })
   }, [])
 
