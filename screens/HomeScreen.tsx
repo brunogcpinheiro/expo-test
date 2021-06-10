@@ -14,6 +14,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Text>Bem vindo, {data?.name}!</Text>
+
       <Text>Seu email.: {data?.email}</Text>
       <Button mode="contained" style={{ marginTop: 30 }} onPress={handleLogout}>
         <Text>Sair</Text>
